@@ -1,7 +1,7 @@
-# request-animation
+# request-animation-runner
 
-[![npm](https://img.shields.io/npm/v/request-animation?style=flat-square)](https://www.npmjs.com/package/request-animation)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/request-animation?style=flat-square)
+[![npm](https://img.shields.io/npm/v/request-animation-runner?style=flat-square)](https://www.npmjs.com/package/request-animation-runner)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/request-animation-runner?style=flat-square)
 
 Class for run loop animation with RAF
 
@@ -10,19 +10,19 @@ Class for run loop animation with RAF
 npm
 
 ```sh
-npm install request-animation
+npm install request-animation-runner
 ```
 
 yarn
 
 ```sh
-yarn add request-animation
+yarn add request-animation-runner
 ```
 
 ## Usage
 
 ```js
-import RequestAnimation from 'request-animation';
+import RequestAnimation from 'request-animation-runner';
 
 const requestAnimation = new RequestAnimation();
 
