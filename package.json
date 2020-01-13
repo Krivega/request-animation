@@ -47,7 +47,7 @@
     "jest": "24.9.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
-    "promises-abstraction": "^0.0.2",
+    "promises-abstraction": "^0.0.3",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^5.2.0",
@@ -58,7 +58,8 @@
     "format": "prettier --write \"src/**/*.js\"",
     "test": "jest",
     "build": "NODE_ENV=production rollup --config",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
     "release": "standard-version"
   },
   "standard-version": {
