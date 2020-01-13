@@ -1,5 +1,5 @@
 {
-  "name": "request-animation",
+  "name": "request-animation-runner",
   "description": "Class for run loop animation with RAF",
   "keywords": [
     "raf",
