@@ -5207,10 +5207,10 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-promises-abstraction@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/promises-abstraction/-/promises-abstraction-0.0.3.tgz#7a0ad6ce5eb814d2ba0e9b66f7c500c0abfb5946"
-  integrity sha512-iP46mjHSyYCpXVSp+y/x1t/U57/KfnxvxvbXjBvY1zDt0fLa+K/cP4Zyky9C/RXWFH3jLzsZhG2oEXpJVuCPNg==
+promise-delay@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/promise-delay/-/promise-delay-2.1.0.tgz#823f4a5189a996ce574be9111bd6551457cdf035"
+  integrity sha1-gj9KUYmpls5XS+kRG9ZVFFfN8DU=
 
 prompts@^2.0.1:
   version "2.3.2"

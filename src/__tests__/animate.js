@@ -1,4 +1,4 @@
-import delayPromise from 'promises-abstraction/dist/cjs/delayPromise';
+import delayPromise from 'promise-delay';
 import { REQUEST_ANIMATION_FRAME_TIMEOUT } from '../setupTests';
 import RequestAnimation from '../index';
 
