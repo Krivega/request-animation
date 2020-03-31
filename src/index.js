@@ -29,7 +29,7 @@ export default class RequestAnimation {
      *
      * @returns {undefined}
      */
-    const animateLoop = timestamp => {
+    const animateLoop = (timestamp) => {
       this.request(animateLoop);
 
       // calc elapsed time since last loop
