@@ -1,41 +1,48 @@
 {
   "name": "request-animation-runner",
+  "version": "0.0.4",
   "description": "Class for run loop animation with RAF",
   "keywords": [
     "raf",
     "animation"
   ],
-  "version": "0.0.4",
-  "author": {
-    "name": "Krivega Dmitriy",
-    "email": "mr.krivega@gmail.com",
-    "url": "https://krivega.com"
+  "bugs": {
+    "url": "https://github.com/Krivega/request-animation/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Krivega/request-animation.git"
   },
-  "bugs": {
-    "url": "https://github.com/Krivega/request-animation/issues"
-  },
   "license": "MIT",
+  "author": {
+    "name": "Krivega Dmitriy",
+    "email": "mr.krivega@gmail.com",
+    "url": "https://krivega.com"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "main:src": "src/index.js",
   "files": [
     "dist",
     "README.md"
   ],
+  "scripts": {
+    "build": "NODE_ENV=production rollup --config",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "eslint src/. --ext .js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "release": "standard-version",
+    "test": "jest"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "babel-eslint": "10.1.0",
     "babel-jest": "^26.6.3",
-    "promise-delay": "^2.1.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^7.0.0",
@@ -48,20 +55,13 @@
     "jest": "26.6.3",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
+    "promise-delay": "^2.1.0",
     "rollup": "^2.35.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-terser": "^7.0.2",
     "standard-version": "^9.0.0"
   },
-  "scripts": {
-    "lint": "eslint src/. --ext .js",
-    "format": "prettier --write \"src/**/*.js\"",
-    "test": "jest",
-    "build": "NODE_ENV=production rollup --config",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "release": "standard-version"
-  },
+  "main:src": "src/index.js",
   "standard-version": {
     "scripts": {
       "prerelease": "npm run lint && CI=true npm test",
