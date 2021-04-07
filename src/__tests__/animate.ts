@@ -1,3 +1,4 @@
+// @ts-ignore
 import delayPromise from 'promise-delay';
 import { REQUEST_ANIMATION_FRAME_TIMEOUT } from '../setupTests';
 import RequestAnimation from '../index';
@@ -12,7 +13,15 @@ const delayTimeout = REQUEST_ANIMATION_FRAME_TIMEOUT / 4;
  * @param {number} params.countRuns - Count runs animate
  * @returns {number} count
  */
-const calcDesiredCountCalls = ({ timeoutRun, fps, countRuns }) => {
+const calcDesiredCountCalls = ({
+  timeoutRun,
+  fps,
+  countRuns,
+}: {
+  timeoutRun: number;
+  fps: number;
+  countRuns: number;
+}) => {
   const timeElapsed = timeoutRun * countRuns;
   const fpsInterval = 1000 / fps;
 
@@ -25,16 +34,16 @@ const calcDesiredCountCalls = ({ timeoutRun, fps, countRuns }) => {
   return Math.floor(count) + 1;
 };
 
-describe('RequestAnimation: animate async', () => {
-  let requestAnimation;
-  let mockFn;
-  let mockFn2;
+describe('RequestAnimation: animate', () => {
+  let requestAnimation: RequestAnimation;
+  let mockFn: jest.Mock<any, any>;
+  let mockFn2: jest.Mock<any, any>;
 
   beforeEach(() => {
     jest.resetModules();
     requestAnimation = new RequestAnimation();
-    mockFn = jest.fn().mockResolvedValue();
-    mockFn2 = jest.fn().mockResolvedValue();
+    mockFn = jest.fn();
+    mockFn2 = jest.fn();
   });
 
   it('animate: default fps=60', () => {
@@ -43,7 +52,7 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(1);
 
-    requestAnimation.runAsync(mockFn);
+    requestAnimation.run(mockFn);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
@@ -60,8 +69,8 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(2);
 
-    requestAnimation.runAsync(mockFn);
-    requestAnimation.runAsync(mockFn2);
+    requestAnimation.run(mockFn);
+    requestAnimation.run(mockFn2);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
@@ -79,7 +88,7 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(1);
 
-    requestAnimation.runAsync(mockFn, fps);
+    requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
@@ -96,7 +105,7 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(1);
 
-    requestAnimation.runAsync(mockFn, fps);
+    requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
@@ -113,7 +122,7 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(1);
 
-    requestAnimation.runAsync(mockFn, fps);
+    requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
@@ -130,7 +139,7 @@ describe('RequestAnimation: animate async', () => {
 
     expect.assertions(1);
 
-    requestAnimation.runAsync(mockFn, fps);
+    requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();

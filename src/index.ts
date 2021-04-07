@@ -1,9 +1,5 @@
-/**
- * RequestAnimation
- * @class
- */
 export default class RequestAnimation {
-  _requestID = null;
+  _requestID?: number;
 
   _active = true;
 
@@ -16,7 +12,7 @@ export default class RequestAnimation {
    *
    * @returns {undefined}
    */
-  run(animationFunc, fps = 60) {
+  run(animationFunc: FrameRequestCallback, fps = 60) {
     const fpsInterval = 1000 / fps;
 
     let delta = 0; // 0 for run for first, set Date.now() if no needs first run
@@ -29,7 +25,7 @@ export default class RequestAnimation {
      *
      * @returns {undefined}
      */
-    const animateLoop = (timestamp) => {
+    const animateLoop = (timestamp: number) => {
       this.request(animateLoop);
 
       // calc elapsed time since last loop
@@ -42,7 +38,7 @@ export default class RequestAnimation {
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         delta = timestamp - (elapsed % fpsInterval);
 
-        animationFunc();
+        animationFunc(timestamp);
       }
     };
 
@@ -59,7 +55,7 @@ export default class RequestAnimation {
    *
    * @returns {undefined}
    */
-  async runAsync(animationFunc, fps = 60) {
+  async runAsync(animationFunc: FrameRequestCallback, fps = 60) {
     const fpsInterval = 1000 / fps;
 
     let delta = 0; // 0 for run for first, set Date.now() if no needs first run
@@ -72,7 +68,7 @@ export default class RequestAnimation {
      *
      * @returns {undefined}
      */
-    const animateLoop = async (timestamp) => {
+    const animateLoop = async (timestamp: number) => {
       // calc elapsed time since last loop
       const elapsed = timestamp - delta;
 
@@ -83,7 +79,7 @@ export default class RequestAnimation {
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         delta = timestamp - (elapsed % fpsInterval);
 
-        await animationFunc();
+        await animationFunc(timestamp);
       }
 
       this.request(animateLoop);
@@ -100,7 +96,7 @@ export default class RequestAnimation {
    *
    * @returns {undefined}
    */
-  request(animationFunc) {
+  request(animationFunc: FrameRequestCallback) {
     if (this._active) {
       this._requestID = window.requestAnimationFrame(animationFunc);
     }
@@ -112,10 +108,8 @@ export default class RequestAnimation {
    * @returns {undefined}
    */
   cancelRequest() {
-    const { _requestID } = this;
-
-    if (_requestID) {
-      window.cancelAnimationFrame(_requestID);
+    if (this._requestID) {
+      window.cancelAnimationFrame(this._requestID);
     }
   }
 

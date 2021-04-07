@@ -1,8 +1,8 @@
 import RequestAnimation from '../index';
 
 describe('RequestAnimation', () => {
-  let requestAnimation;
-  let mockFn;
+  let requestAnimation: RequestAnimation;
+  let mockFn: jest.Mock<any, any>;
 
   beforeEach(() => {
     jest.resetModules();
