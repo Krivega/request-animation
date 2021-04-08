@@ -50,13 +50,14 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 2;
     const fps = 60;
 
-    expect.assertions(1);
+    expect.assertions(2);
 
     requestAnimation.run(mockFn);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
 
+      expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );
@@ -67,7 +68,7 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 3;
     const fps = 60;
 
-    expect.assertions(2);
+    expect.assertions(3);
 
     requestAnimation.run(mockFn);
     requestAnimation.run(mockFn2);
@@ -76,6 +77,7 @@ describe('RequestAnimation: animate', () => {
       requestAnimation.deactivate();
 
       expect(mockFn).toHaveBeenCalledTimes(0);
+      expect(mockFn2.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn2.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );
@@ -86,13 +88,14 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 1;
     const fps = 1;
 
-    expect.assertions(1);
+    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
 
+      expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );
@@ -103,13 +106,14 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 6;
     const fps = countRuns - 2;
 
-    expect.assertions(1);
+    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
 
+      expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );
@@ -120,13 +124,14 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 2;
     const fps = 1 / 4;
 
-    expect.assertions(1);
+    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
 
+      expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }) + 1 // 1 or 2
       );
@@ -137,13 +142,14 @@ describe('RequestAnimation: animate', () => {
     const countRuns = 6;
     const fps = countRuns + 2;
 
-    expect.assertions(1);
+    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
     return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
       requestAnimation.deactivate();
 
+      expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );

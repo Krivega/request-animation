@@ -1,8 +1,10 @@
 import typescript from 'rollup-plugin-typescript2';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 const plugins = [
+  commonjs(),
   typescript({
     useTsconfigDeclarationDir: true,
     tsconfigOverride: { exclude: ['**/__tests__/**', '**/setupTests.*'] },

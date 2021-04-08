@@ -34,14 +34,14 @@ const calcDesiredCountCalls = ({
   return Math.floor(count) + 1;
 };
 
-describe('RequestAnimation: animate async', () => {
+describe('RequestAnimation: animate async: backgroundThrottling=false', () => {
   let requestAnimation: RequestAnimation;
   let mockFn: jest.Mock<any, any>;
   let mockFn2: jest.Mock<any, any>;
 
   beforeEach(() => {
     jest.resetModules();
-    requestAnimation = new RequestAnimation();
+    requestAnimation = new RequestAnimation({ backgroundThrottling: false });
     mockFn = jest.fn().mockResolvedValue(null);
     mockFn2 = jest.fn().mockResolvedValue(null);
   });

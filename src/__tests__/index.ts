@@ -19,9 +19,16 @@ describe('RequestAnimation', () => {
     expect(mockFn).toHaveBeenCalledTimes(0);
   });
 
-  it('request deactivate/activate', () => {
-    expect(requestAnimation._active).toBe(true);
+  it('cancelRequest: backgroundThrottling=false', () => {
+    requestAnimation = new RequestAnimation({ backgroundThrottling: false });
+    requestAnimation.request(mockFn);
+    requestAnimation.cancelRequest();
+    jest.runAllTimers();
 
+    expect(mockFn).toHaveBeenCalledTimes(0);
+  });
+
+  it('request deactivate/activate', () => {
     requestAnimation.request(mockFn);
     jest.runAllTimers();
 
@@ -31,7 +38,6 @@ describe('RequestAnimation', () => {
     requestAnimation.request(mockFn);
     jest.runAllTimers();
 
-    expect(requestAnimation._active).toBe(false);
     expect(mockFn).toHaveBeenCalledTimes(1);
 
     requestAnimation.activate();
@@ -40,6 +46,5 @@ describe('RequestAnimation', () => {
     jest.runAllTimers();
 
     expect(mockFn).toHaveBeenCalledTimes(2);
-    expect(requestAnimation._active).toBe(true);
   });
 });

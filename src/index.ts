@@ -1,7 +1,19 @@
-export default class RequestAnimation {
-  _requestID?: number;
+import createRunner from './createRunner';
 
-  _active = true;
+export default class RequestAnimation {
+  private requestID?: number;
+
+  private active = true;
+
+  private runner: ReturnType<typeof createRunner>;
+
+  constructor(
+    { backgroundThrottling }: { backgroundThrottling?: boolean } = {
+      backgroundThrottling: true,
+    }
+  ) {
+    this.runner = createRunner(backgroundThrottling);
+  }
 
   /**
    * Resolve the animation loop calculates time elapsed since the last loop
@@ -97,8 +109,8 @@ export default class RequestAnimation {
    * @returns {undefined}
    */
   request(animationFunc: FrameRequestCallback) {
-    if (this._active) {
-      this._requestID = window.requestAnimationFrame(animationFunc);
+    if (this.active) {
+      this.requestID = this.runner.requestAnimationFrame(animationFunc);
     }
   }
 
@@ -108,8 +120,8 @@ export default class RequestAnimation {
    * @returns {undefined}
    */
   cancelRequest() {
-    if (this._requestID) {
-      window.cancelAnimationFrame(this._requestID);
+    if (this.requestID) {
+      this.runner.cancelAnimationFrame(this.requestID);
     }
   }
 
@@ -120,7 +132,7 @@ export default class RequestAnimation {
    */
   activate() {
     this.cancelRequest();
-    this._active = true;
+    this.active = true;
   }
 
   /**
@@ -130,6 +142,6 @@ export default class RequestAnimation {
    */
   deactivate() {
     this.cancelRequest();
-    this._active = false;
+    this.active = false;
   }
 }
