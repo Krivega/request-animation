@@ -1,27 +1,43 @@
 // @ts-ignore
-import raf from 'raf';
+import { request, cancelRequest } from './requestTimeout';
 
 let isAvailableAnimation = !document.hidden;
 
-document.addEventListener('visibilitychange', () => {
-  isAvailableAnimation = !document.hidden;
-});
-
 const createRunner = (backgroundThrottling: boolean = true) => {
+  const hasAvailableAnimation = () => backgroundThrottling || isAvailableAnimation;
+  const restartHandlers = new Map<number, () => void>();
+  const whenRestarted = (handle: number, callback: () => void) => {
+    restartHandlers.set(handle, callback);
+  };
+  const offRestart = (handle: number) => {
+    restartHandlers.delete(handle);
+  };
+
   const requestAnimationFrame = (callback: FrameRequestCallback): number => {
-    if (backgroundThrottling || isAvailableAnimation) {
+    if (hasAvailableAnimation()) {
       return window.requestAnimationFrame(callback);
     }
 
-    return raf(callback);
+    return request(callback);
   };
 
   const cancelAnimationFrame = (handle: number): void => {
     window.cancelAnimationFrame(handle);
-    raf.cancel(handle);
+    cancelRequest(handle);
   };
 
-  return { requestAnimationFrame, cancelAnimationFrame };
+  document.addEventListener('visibilitychange', () => {
+    isAvailableAnimation = !document.hidden;
+
+    if (!hasAvailableAnimation()) {
+      restartHandlers.forEach((callback, key) => {
+        callback();
+        offRestart(key);
+      });
+    }
+  });
+
+  return { requestAnimationFrame, cancelAnimationFrame, whenRestarted, offRestart };
 };
 
 export default createRunner;

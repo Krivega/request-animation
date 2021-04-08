@@ -109,8 +109,17 @@ export default class RequestAnimation {
    * @returns {undefined}
    */
   request(animationFunc: FrameRequestCallback) {
+    if (this.requestID) {
+      this.runner.offRestart(this.requestID);
+    }
+
     if (this.active) {
       this.requestID = this.runner.requestAnimationFrame(animationFunc);
+
+      this.runner.whenRestarted(this.requestID, () => {
+        this.cancelRequest();
+        this.requestID = this.runner.requestAnimationFrame(animationFunc);
+      });
     }
   }
 
@@ -122,6 +131,7 @@ export default class RequestAnimation {
   cancelRequest() {
     if (this.requestID) {
       this.runner.cancelAnimationFrame(this.requestID);
+      this.runner.offRestart(this.requestID);
     }
   }
 
