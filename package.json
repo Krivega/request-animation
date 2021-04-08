@@ -1,6 +1,6 @@
 {
   "name": "request-animation-runner",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Class for run loop animation with RAF",
   "keywords": [
     "raf",
