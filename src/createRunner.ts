@@ -1,10 +1,12 @@
 // @ts-ignore
 import { request, cancelRequest } from './requestTimeout';
 
-let isAvailableAnimation = !document.hidden;
+let isAvailableAnimation = !document || !document.hidden;
 
 const createRunner = (backgroundThrottling: boolean = true) => {
-  const hasAvailableAnimation = () => backgroundThrottling || isAvailableAnimation;
+  const hasAvailableAnimation = () => {
+    return backgroundThrottling || isAvailableAnimation;
+  };
   const restartHandlers = new Map<number, () => void>();
   const whenRestarted = (handle: number, callback: () => void) => {
     restartHandlers.set(handle, callback);
@@ -27,7 +29,7 @@ const createRunner = (backgroundThrottling: boolean = true) => {
   };
 
   document.addEventListener('visibilitychange', () => {
-    isAvailableAnimation = !document.hidden;
+    isAvailableAnimation = !document || !document.hidden;
 
     if (!hasAvailableAnimation()) {
       restartHandlers.forEach((callback, key) => {
