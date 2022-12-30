@@ -20,14 +20,16 @@ export default class RequestAnimation {
    * and only draws if your specified fps interval is achieved
    *
    * @param {function} animationFunc - Function for animation
-   * @param {string}   fps           - Frames per Second
+   * @param {number}   fps           - Frames per Second
+   * @param {number}   limit         - Frames summary
    *
    * @returns {undefined}
    */
-  run(animationFunc: FrameRequestCallback, fps = 60) {
+  run(animationFunc: FrameRequestCallback, fps: number = 60, limit?: number) {
     const fpsInterval = 1000 / fps;
 
     let delta = 0; // 0 for run for first, set Date.now() if no needs first run
+    let count = 0;
 
     /**
      * Animate loop
@@ -38,6 +40,12 @@ export default class RequestAnimation {
      * @returns {undefined}
      */
     const animateLoop = (timestamp: number) => {
+      const isLimited = limit && count >= limit;
+
+      if (isLimited) {
+        return;
+      }
+
       this.request(animateLoop);
 
       // calc elapsed time since last loop
@@ -49,6 +57,7 @@ export default class RequestAnimation {
         // Get ready for next frame by setting delta=timestamp, but also adjust for your
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         delta = timestamp - (elapsed % fpsInterval);
+        count += 1;
 
         animationFunc(timestamp);
       }
@@ -63,14 +72,16 @@ export default class RequestAnimation {
    * and only draws if your specified fps interval is achieved
    *
    * @param {function} animationFunc - Function for animation
-   * @param {string}   fps           - Frames per Second
+   * @param {number}   fps           - Frames per Second
+   * @param {number}   limit         - Frames summary
    *
    * @returns {undefined}
    */
-  async runAsync(animationFunc: FrameRequestCallback, fps = 60) {
+  async runAsync(animationFunc: FrameRequestCallback, fps: number = 60, limit?: number) {
     const fpsInterval = 1000 / fps;
 
     let delta = 0; // 0 for run for first, set Date.now() if no needs first run
+    let count = 0;
 
     /**
      * Animate loop
@@ -81,6 +92,12 @@ export default class RequestAnimation {
      * @returns {undefined}
      */
     const animateLoop = async (timestamp: number) => {
+      const isLimited = limit && count >= limit;
+
+      if (isLimited) {
+        return;
+      }
+
       // calc elapsed time since last loop
       const elapsed = timestamp - delta;
 
@@ -90,6 +107,7 @@ export default class RequestAnimation {
         // Get ready for next frame by setting delta=timestamp, but also adjust for your
         // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
         delta = timestamp - (elapsed % fpsInterval);
+        count += 1;
 
         await animationFunc(timestamp);
       }

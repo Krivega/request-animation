@@ -47,10 +47,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: default fps=60', () => {
+    expect.assertions(2);
+
     const countRuns = 2;
     const fps = 60;
-
-    expect.assertions(2);
 
     requestAnimation.run(mockFn);
 
@@ -65,10 +65,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: call 2 times fps=60', () => {
+    expect.assertions(3);
+
     const countRuns = 3;
     const fps = 60;
-
-    expect.assertions(3);
 
     requestAnimation.run(mockFn);
     requestAnimation.run(mockFn2);
@@ -85,10 +85,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: fps=1', () => {
+    expect.assertions(2);
+
     const countRuns = 1;
     const fps = 1;
-
-    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
@@ -103,10 +103,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: less interval', () => {
+    expect.assertions(2);
+
     const countRuns = 6;
     const fps = countRuns - 2;
-
-    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
@@ -121,10 +121,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: less 1 fps', () => {
+    expect.assertions(2);
+
     const countRuns = 2;
     const fps = 1 / 4;
-
-    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
@@ -139,10 +139,10 @@ describe('RequestAnimation: animate', () => {
   });
 
   it('animate: more interval', () => {
+    expect.assertions(2);
+
     const countRuns = 6;
     const fps = countRuns + 2;
-
-    expect.assertions(2);
 
     requestAnimation.run(mockFn, fps);
 
@@ -153,6 +153,21 @@ describe('RequestAnimation: animate', () => {
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
         calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
       );
+    });
+  });
+
+  it('animate: with limit', () => {
+    expect.assertions(1);
+
+    const countRuns = 10;
+    const limit = 5;
+
+    requestAnimation.run(mockFn, undefined, limit);
+
+    return delayPromise(REQUEST_ANIMATION_FRAME_TIMEOUT * countRuns + delayTimeout).then(() => {
+      requestAnimation.deactivate();
+
+      expect(mockFn.mock.calls.length).toBe(limit);
     });
   });
 });
