@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/Krivega/request-animation/compare/v0.3.2...v0.3.3) (2022-12-30)
+
+### Features
+
+- add limit ([31fd539](https://github.com/Krivega/request-animation/commit/31fd539b1ef364e0ff02bb47e1d9599f6c5fa6b5))
+
 ### [0.3.2](https://github.com/Krivega/request-animation/compare/v0.3.1...v0.3.2) (2022-01-18)
 
 ### [0.3.1](https://github.com/Krivega/request-animation/compare/v0.3.0...v0.3.1) (2021-04-08)
