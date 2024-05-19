@@ -1,7 +1,7 @@
 // @ts-ignore
 import delayPromise from 'promise-delay';
-import { REQUEST_ANIMATION_FRAME_TIMEOUT } from '../setupTests';
 import RequestAnimation from '../index';
+import { REQUEST_ANIMATION_FRAME_TIMEOUT } from '../setupTests';
 
 const delayTimeout = REQUEST_ANIMATION_FRAME_TIMEOUT / 4;
 
@@ -59,7 +59,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
 
       expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }),
       );
     });
   });
@@ -79,7 +79,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
       expect(mockFn).toHaveBeenCalledTimes(0);
       expect(mockFn2.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn2.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }),
       );
     });
   });
@@ -97,7 +97,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
 
       expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }),
       );
     });
   });
@@ -115,7 +115,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
 
       expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }),
       );
     });
   });
@@ -133,7 +133,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
 
       expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }) + 1 // 1 or 2
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }) + 1, // 1 or 2
       );
     });
   });
@@ -151,7 +151,7 @@ describe('RequestAnimation: animate: backgroundThrottling=false', () => {
 
       expect(mockFn.mock.calls.length).toBeGreaterThanOrEqual(countRuns / 2);
       expect(mockFn.mock.calls.length).toBeLessThanOrEqual(
-        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT })
+        calcDesiredCountCalls({ fps, countRuns, timeoutRun: REQUEST_ANIMATION_FRAME_TIMEOUT }),
       );
     });
   });

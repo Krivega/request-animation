@@ -10,7 +10,7 @@ export default class RequestAnimation {
   constructor(
     { backgroundThrottling }: { backgroundThrottling?: boolean } = {
       backgroundThrottling: true,
-    }
+    },
   ) {
     this.runner = createRunner(backgroundThrottling);
   }
