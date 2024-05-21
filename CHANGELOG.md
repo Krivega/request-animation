@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/Krivega/request-animation/compare/v1.0.0...v1.0.1) (2024-05-21)
+
+### Bug Fixes
+
+- exports cjs ([d79b31c](https://github.com/Krivega/request-animation/commit/d79b31cafc75c310ec28cf567f98822b9f783eac))
+
 ## [1.0.0](https://github.com/Krivega/request-animation/compare/v0.3.3...v1.0.0) (2024-05-19)
 
 ### [0.3.3](https://github.com/Krivega/request-animation/compare/v0.3.2...v0.3.3) (2022-12-30)
